@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+
+<!-- <h1>All Blood sugars </h1> -->
+
+
+<!-- {% for bs in all_bs %}
+<div class="bs">
+    <a href="/bs/{{ bs.id }}">{{ bs.bs }}</a> - 
+    actions- {{ bs.act }} 
+    <p><strong>Time:</strong> {{ bs.time }}</p>
+</div>
+{% endfor %} -->
+
+{% if current_user.is_authenticated %}
+    {% if times|length > 0 %}
+    <div><h2 > Latest Entry: {{last}} at {{lasttime}}</h2>
+    <p> Last activity: {{lastact}} <p></div>
+    
+    <canvas id="myChart"style="width:100%; height:400px"></canvas>
+    <script>
+        // let xValues = [1.2, 2.3, 4.5, 8.3];
+        // let yValues = [123, 321, 153, 276];
+        new Chart('myChart',{
+            type:'line',
+            data: {
+                labels: {{ times | safe }},  
+                datasets: [{
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: {{ nums | safe }}
+                }]
+            },
+            options: {
+                responsive: false,
+                legend: {display: false},
+                scales: {
+                    yAxes: [{ticks: {min:60, max:400}}]
+                }
+            }
+        });
+    </script>
+    {% else %}
+    <h2>No data to show yet! Enter your blood sugar or create an action to start</h2>
+    {% endif %}
+
+{% else %}
+<div >
+<h2 class='m-3 mt-5'>Sign up to start tracking!</h2>
+<p class='m-3' style='width:40%;'> Diatrack is made to help track bloodsugars througout the day, while keeping up with your responses. Similar to Dexcom, Diatrack keeps a neat graph of your inputs so you can visualize trends you may not see while using the customary blood glucose meter.</p>
+</div>
+{%endif%}
+
+{% endblock %}

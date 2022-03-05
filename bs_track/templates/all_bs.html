@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>All Blood sugars </h1>
+
+
+
+{% for bs in all_bs %}
+<div class="bs">
+    <a href="/bs/{{ bs.id }}">{{ bs.bs }}</a> - 
+    actions- {{ bs.act }} 
+    <p><strong>Time:</strong> {{ bs.time }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

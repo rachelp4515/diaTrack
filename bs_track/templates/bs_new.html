@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Enter Blood Sugar </h1>
+
+ <form method="POST"  action="{{ url_for('bs.new_bs') }}" > 
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+        {{ form.bs.label }}
+        {{ form.bs }}
+
+        {{ form.time.label }}
+        {{ form.time }}
+
+        {{ form.action.label }}
+        {{ form.action }}
+
+        {{ form.submit }}
+
+        
+    </fieldset>
+</form>
+
+
+{% endblock %}

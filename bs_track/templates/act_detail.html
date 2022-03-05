@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Action - {{ action.action_type }}</h1>
+
+
+<p><strong>Time:</strong> {{ action.time }}</p>
+
+<p><strong>Notes:</strong> {{ action.notes }}</p>
+
+
+<p><strong>Created By:</strong> {{ current_user.username }}</p>
+
+<!-- {% if current_user.is_authenticated %}
+    <form action="/add_to_shopping_list/{{ item.id }}" method="POST">
+        <input type="submit" value="Add to List">
+    </form>
+{% endif %}  -->
+
+<h2>Edit Action</h2>
+
+<form method="POST" action="{{ url_for('act.act_detail', act_id=act.id) }}">
+    <fieldset>
+        <legend> Edit your action:</legend>
+        {{ form.action.label }}
+        {{ form.action }}
+        {{ form.time.label }}
+        {{ form.time }}
+        {{ form.notes.label }}
+        {{ form.notes }}
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+
+{% endblock %}

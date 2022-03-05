@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>New Action</h1>
+
+<form method="POST" action="{{url_for('acts.new_act')}}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+            {{ form.act_type.label }}
+            {{ form.act_type }}
+            {{ form.time.label }}
+            {{ form.time }}
+            {{ form.notes.label }}
+            {{ form.notes(cols="15", rows="10") }}
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+
+
+{% endblock %}
