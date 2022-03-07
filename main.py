@@ -23,7 +23,7 @@ def index():
         nums.append(int(sugar.bs))
         acts.append(sugar.act)
 
-    if len(nums == 0):
+    if len(nums) == 0:
         num_avg = 0
     else:
         num_avg = math.floor(sum(nums)/len(nums))
