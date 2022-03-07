@@ -5,18 +5,11 @@
 <!-- <h1>All Blood sugars </h1> -->
 
 
-<!-- {% for bs in all_bs %}
-<div class="bs">
-    <a href="/bs/{{ bs.id }}">{{ bs.bs }}</a> - 
-    actions- {{ bs.act }} 
-    <p><strong>Time:</strong> {{ bs.time }}</p>
-</div>
-{% endfor %} -->
 
 {% if current_user.is_authenticated %}
     {% if times|length > 0 %}
-    <div><h2 > Latest Entry: {{last}} at {{lasttime}}</h2>
-    <p> Last activity: {{lastact}} <p></div>
+    <div><h2 > Latest Entry: {{nums[-1]}} at {{times[-1]}}</h2>
+    <p> Last activity: {{acts[-1]}} <p></div>
     
     <canvas id="myChart"style="width:100%; height:400px"></canvas>
     <script>
@@ -27,6 +20,7 @@
             data: {
                 labels: {{ times | safe }},  
                 datasets: [{
+                    label: 'Blood Glucose Levels',
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(0,0,255,1.0)",
@@ -43,6 +37,21 @@
             }
         });
     </script>
+    <div>
+        <h2 class='m-4'><strong> Averages</strong> </h2>
+            <h4 class='m-4'> 
+                Average blood sugar: {{ num_avg }}
+            </h4>
+            <h3 class='m-4'> You've taken a total of {{ acts|length }} actions </h3>
+            <h4 class='m-4'> All actions: </h4>
+            <ul class='m-4'>
+                <li> Boluses -{{boluses}} </li>
+                <li> Carb Intakes -{{carbs}} </li>
+                <li> Activities -{{activities}} </li>
+                <li> Other -{{others}} </li>
+            </ul>
+        </div>
+
     {% else %}
     <h2>No data to show yet! Enter your blood sugar or create an action to start</h2>
     {% endif %}

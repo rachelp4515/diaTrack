@@ -17,24 +17,25 @@
         <p>{{ message }}</p>
         {% endfor %}
         <nav>
-            <a href="/">Home</a>
+            <a href="/" class="btn bg-info" style="max-height:40px;">Home</a> 
             <div>
                 {% if current_user.is_authenticated %}
                 <div>
-                    <a href="{{url_for('bs.new_bs')}}" class=" btn bg-info"> New Blood Sugar</a>
-                    <a href="{{url_for('bs.index')}}" class=" btn bg-info"> View All</a>
+                    <a href="{{url_for('bs.new_bs')}}" class="m-2 btn bg-info"> New Blood Sugar</a>
+                    <a href="{{url_for('bs.index')}}" class="btn bg-light border border-info">> View All</a>
+                    <a href="{{url_for('acts.new_act')}}" class=" m-2 btn bg-success">New Action</a>
+                    <a href="{{url_for('acts.index')}}" class="btn bg-light border border-success">> View All</a>
+                    <a href="{{url_for('auth.logout')}}"class="text-dark left-0 btn btn-light border border-dark"> <small > logout </small></a>
                 </div>
-                <a href="{{url_for('acts.new_act')}}" class="btn">New Action</a>
-                <a href="{{url_for('acts.index')}}" class="btn">View All</a>
                 {% else %}
                 <a href="/signup">Sign Up</a>
                 <a href="/login">Log In</a>
                 {% endif %}
             </div>
         </nav>
-        {% if current_user.is_authenticated %}
+        <!-- {% if current_user.is_authenticated %}
         <p>You are logged in as {{ current_user.username }}</p>
-        {% endif %}
+        {% endif %} -->
         {% block content %}{% endblock %}
         </div>
     </div>

@@ -29,7 +29,7 @@ def new_bs():
         )
         db.session.add(new_bs)
         db.session.commit()
-        return redirect(url_for('bs.detail', bs_id=new_bs.id))
+        return redirect(url_for('bs.index', bs_id=new_bs.id))
     return render_template('bs_new.html', form=form)
 
 # --------------------------------- / detail + edit form
@@ -41,13 +41,9 @@ def detail(bs_id):
     bs = Bloodsugar.query.get(bs_id)
     form = BloodsugarForm(obj=bs)
     if form.validate_on_submit():
-        # bs.bs = form.bs.data
-        # bs.time = form.time.data
-        # bs.action = form.action.data
         form.populate_obj(bs)
         db.session.commit()
-        print('-------------------------------------')
-        return redirect(url_for('bs.detail', bs=bs, form=form, bs_id=bs_id))
+        return redirect(url_for('bs.index', bs=bs, form=form, bs_id=bs_id))
 
     return render_template('bs_detail.html', bs=bs, form=form)
 

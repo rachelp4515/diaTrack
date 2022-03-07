@@ -1,8 +1,8 @@
 <!-- login.html -->
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>Log In</h1>
+<div class="mx-auto">
+<h1 class="text-success  mx-auto">Log In</h1>
 
 <form action="/login" method="POST">
     {{ form.csrf_token }}
@@ -28,5 +28,5 @@
         {{ form.submit }}
     </fieldset>
 </form>
-
+</div>
 {% endblock %}

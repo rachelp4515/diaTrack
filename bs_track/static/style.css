@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     background-color: #eee;
     font-family: 'Open Sans', sans-serif;
 }
@@ -12,20 +12,6 @@ body {
     padding: 20px;
 }
 
-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-nav a {
-    color: navy;
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 1px 5px;
-    font-size: 1.2em;
-}
 
 fieldset {
     display: flex;
@@ -42,10 +28,6 @@ fieldset input {
     padding: 5px;
 }
 
-input[type=submit] {
-    width: 100px;
-    align-self: flex-end;
-}
 
 div.store {
     border: 1px solid black;
@@ -68,35 +50,3 @@ div.item-details {
     height: 300px;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.bs-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .bs-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .bs-dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .bs-dropdown-content a:hover {background-color: #ddd;}
-  
-  /* Show the dropdown menu on hover */
-  .bs-dropdown:hover .bs-dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .bs-dropdown:hover .bs-dropbtn {background-color: #637fbdab;}

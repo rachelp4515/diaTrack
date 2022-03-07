@@ -1,35 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>Action - {{ action.action_type }}</h1>
-
-
-<p><strong>Time:</strong> {{ action.time }}</p>
-
-<p><strong>Notes:</strong> {{ action.notes }}</p>
+<div>
+    <h1>Action - {{ act.act_type }}</h1>
 
 
-<p><strong>Created By:</strong> {{ current_user.username }}</p>
+    <p><strong>Time:</strong> {{ act.time }}</p>
 
-<!-- {% if current_user.is_authenticated %}
-    <form action="/add_to_shopping_list/{{ item.id }}" method="POST">
-        <input type="submit" value="Add to List">
+    <p><strong>Notes:</strong> {{ act.notes }}</p>
+
+
+    <p><strong>Created By:</strong> {{ current_user.username }}</p>
+
+    <form method="POST" action="{{url_for('acts.delete', act_id=act.id)}}">
+        <button type="submit" class="btn bg-light border border-info"> Delete Entry </button>
     </form>
-{% endif %}  -->
+</div>
+<div>
+<h2 class="m-4">Edit act</h2>
 
-<h2>Edit Action</h2>
-
-<form method="POST" action="{{ url_for('act.act_detail', act_id=act.id) }}">
+<form method="POST" action="{{ url_for('acts.detail', act_id=act.id) }}">
+    {{ form.csrf_token }}
     <fieldset>
-        <legend> Edit your action:</legend>
-        {{ form.action.label }}
-        {{ form.action }}
+        {{ form.act_type.label }}
+        {{ form.act_type }}
         {{ form.time.label }}
         {{ form.time }}
         {{ form.notes.label }}
         {{ form.notes }}
-        <input type="submit" value="Submit">
+
+        {{ form.submit }}
     </fieldset>
 </form>
-
+</div>
 {% endblock %}

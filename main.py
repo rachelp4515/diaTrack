@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from forms import BloodsugarForm
 from bs_track.models import Bloodsugar, Action
+import math
 
 from bs_track.extensions import app, db
 
@@ -17,8 +18,28 @@ def index():
     nums = []
     acts = []
     for sugar in all_bs:
-        times.append(float(sugar.time))
+        times.append(sugar.time)
         nums.append(int(sugar.bs))
         acts.append(sugar.act)
 
-    return render_template("index.html", all_bs=all_bs, times=times, nums=nums, last=nums[-1], lasttime=times[-1], lastact=acts[-1] )
+    num_avg = math.floor(sum(nums)/len(nums))
+
+    boluses = 0
+    carbs = 0
+    activities = 0
+    others = 0
+    print(acts)
+
+    for act in acts:
+        act = str(act)
+        if act == 'bolus':
+            boluses += 1
+        elif act == 'carb intake':
+            carbs += 1
+        elif act == 'activity':
+            activities += 1
+        else:
+            others += 1
+#dfghjk
+
+    return render_template("index.html", all_bs=all_bs, times=times, nums=nums, acts=acts, num_avg=num_avg, boluses=boluses, carbs=carbs, activities=activities, others=others  )

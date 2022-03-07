@@ -23,11 +23,14 @@ def new_act():
     form =ActionForm()
     if form.validate_on_submit():
         new_act = Action(
-            act_type=form.act_type.data, time=form.time.data, created_by=current_user
+            act_type=form.act_type.data,
+             time=form.time.data, 
+             notes= form.notes.data,
+             created_by=current_user
         )
         db.session.add(new_act)
         db.session.commit()
-        return redirect(url_for('acts.detail', act_id=new_act.id))
+        return redirect(url_for('acts.index', act_id=new_act.id))
     return render_template('act_new.html', form=form)
 
 #--------------------------------- / detail + edit form
@@ -35,11 +38,11 @@ def new_act():
 @login_required
 def detail(act_id):
     act = Action.query.get(act_id)
-    form = BloodsugarForm(obj=act)
+    form = ActionForm(obj=act)
     if form.validate_on_submit():
         form.populate_obj(act)
         db.session.commit()
-        return render_template('act_detail.html', act=act, form=form)
+        return redirect(url_for('acts.index', act=act, form=form, act_id=act_id))
     return render_template('act_detail.html', act=act, form=form)
 
 
@@ -56,3 +59,4 @@ def delete(act_id):
     '''
     db.session.delete(act)
     db.session.commit()
+    return redirect(url_for('acts.index', act_id=act_id))

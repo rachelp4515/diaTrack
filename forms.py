@@ -10,13 +10,13 @@ class BloodsugarForm(FlaskForm):
     bs = StringField(
         'Current Blood Sugar', validators=[DataRequired(), Length(min=2, max=3)]
     )
-    time = StringField('Time - please format 24hour.minutes', validators=[DataRequired(), Length(min=2, max=6)])
+    time = StringField('Time - please format 24h time', validators=[DataRequired(), Length(min=2, max=6)])
     action = SelectField('Action', choices= ACTIONTYPES.choices())
     submit = SubmitField('Submit')
 
 
 class ActionForm(FlaskForm):
-    time = StringField('Time - please format 24hour.minutes', validators=[DataRequired(), Length(min=2, max=6)])
+    time = StringField('Time - please format in 24 time', validators=[DataRequired(), Length(min=2, max=6)])
     act_type = SelectField('Action', choices= ACTIONTYPES.choices())
     notes = TextAreaField(
         'Notes', validators=[DataRequired(), Length(min=0, max=180)]

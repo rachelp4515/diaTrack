@@ -1,47 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Blood Sugar - {{ bs.bs }}</h1>
+<div class="m-5">
 
-<strong>Time:</strong> {{ bs.time }}
+    <h1>Blood Sugar - {{ bs.bs }}</h1>
+    <strong>Time:</strong> {{ bs.time }}
+    <p><strong>Action</strong>: {{ bs.act }}</p>
+    <form method="POST" action="{{url_for('bs.delete', bs_id=bs.id)}}">
+        <button type="submit"> Delete Entry </button>
+    </form>
 
-<p><strong>Action</strong>: {{ bs.act }}</p>
-
-
-<div class="items">
-    {% for action in bs.action %}
-    <div class="item-details">
-        <p><strong>Actions</strong></p>
-        <p><strong>{{ action.act_type }}</strong></p></a>
-    </div>
-    {% endfor %}
 </div>
-<form method="POST" action="{{url_for('bs.delete', bs_id=bs.id)}}">
-    <button type="submit"> Delete Entry </button>
-</form>
-<h2>Edit Blood Sugar</h2>
 
-<form method="POST" action="{{ url_for('bs.detail', bs_id=bs.id) }}">
-    {{ form.csrf_token }}
-    <fieldset>
-        <legend>Please enter your information:</legend>
-        {{ form.bs.label }}
-        {{ form.bs }}
+<div class="m-5">
+    <h2>Edit Blood Sugar</h2>
 
-        <ul>
-            {% for error in form.bs.errors %}
-            <li class="'error"> {{ error }}</li>
-            {% endfor %}
-        </ul>
+    <form method="POST" action="{{ url_for('bs.detail', bs_id=bs.id) }}">
+        {{ form.csrf_token }}
+        <fieldset>
+            <legend>Please enter your information:</legend>
+            {{ form.bs.label }}
+            {{ form.bs }}
 
-        {{ form.time.label }}
-        {{ form.time }}
+            <ul>
+                {% for error in form.bs.errors %}
+                <li class="'error"> {{ error }}</li>
+                {% endfor %}
+            </ul>
 
-        {{ form.action.label }}
-        {{ form.action }}
+            {{ form.time.label }}
+            {{ form.time }}
 
-        {{ form.submit }}
-    </fieldset>
-</form>
+            {{ form.action.label }}
+            {{ form.action }}
 
+            {{ form.submit }}
+        </fieldset>
+    </form>
+</div>
 {% endblock %}

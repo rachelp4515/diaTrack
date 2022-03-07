@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div>
 <h1>All Actions</h1>
-
+<ul>
 {% for act in actions %}
-    <div >
-        <p><strong>Type: {{ act.act_type }}</strong></p>
+    <li >
+       <a href="/acts/{{ act.id }}"> <strong>Type: {{ act.act_type }}</strong></a>
         <p><strong>time: {{ act.time }}</strong></p></a>
-    </div>
+    </li>
     {% endfor %}
-
+</ul>
+</div>
 {% endblock %}
