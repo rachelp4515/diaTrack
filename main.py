@@ -11,6 +11,7 @@ routes = Blueprint("main", __name__)
 
 @routes.route("/")
 def index():
+
     all_bs = Bloodsugar.query.all()
     acts = Action.query.all()
     
@@ -22,13 +23,15 @@ def index():
         nums.append(int(sugar.bs))
         acts.append(sugar.act)
 
-    num_avg = math.floor(sum(nums)/len(nums))
+    if len(nums == 0):
+        num_avg = 0
+    else:
+        num_avg = math.floor(sum(nums)/len(nums))
 
     boluses = 0
     carbs = 0
     activities = 0
     others = 0
-    print(acts)
 
     for act in acts:
         act = str(act)
@@ -40,6 +43,5 @@ def index():
             activities += 1
         else:
             others += 1
-#dfghjk
-
+    
     return render_template("index.html", all_bs=all_bs, times=times, nums=nums, acts=acts, num_avg=num_avg, boluses=boluses, carbs=carbs, activities=activities, others=others  )
